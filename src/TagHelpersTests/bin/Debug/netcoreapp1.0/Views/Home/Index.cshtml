@@ -1,0 +1,67 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-3">
+        <h2>Application uses</h2>
+        <ul>
+            <li>Sample pages using ASP.NET Core MVC</li>
+            <li><a href="http://go.microsoft.com/fwlink/?LinkId=518007">Gulp</a> and <a href="http://go.microsoft.com/fwlink/?LinkId=518004">Bower</a> for managing client-side libraries</li>
+            <li>Theming using <a href="http://go.microsoft.com/fwlink/?LinkID=398939">Bootstrap</a></li>
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <h2>Local TagHelpers</h2>
+        <ul>
+            <!--Should not taghelp due to removed helper quote and unquote-->
+            <li><th:he remove-tag-helper></th:he></li>
+            <!--required missing attribute fails-->
+            <li><th:he required-attribute></th:he></li>
+            <!--required with attribute matches-->
+            <li><th:he required-attribute needed></th:he></li>
+            <!--Incomplete Helper-->
+            <li><th:he not-a-helper ></th:he></li>
+            <!--Value required attribute-->
+            <li><th:he int-value></th:he></li>
+            <li>Unquoted</li>
+            <li><th:he int-value=123></th:he></li>
+            <li>Double</li>
+            <li><th:he int-value="123"></th:he></li>
+            <li>Single</li>
+            <li><th:he int-value='123'></th:he></li>
+            <!--Enum attribute-->
+            <li><th:he enum="Charles"></th:he></li>
+            <!--Dynamic Content-->
+            <li><th:he content="prefix @DateTime.Now suffix"></th:he></li>
+            <!--Optional at symbols-->
+            <li><th:he bool-attribute="@true"></th:he></li>
+            <!--Good Parent-->
+            <li><th:he li-parent></th:he></li>
+            <!--Bad Parent-->
+            <li><p><th:he li-parent></th:he></p></li>
+            <!-- Good child-->
+            <li><th:he a-child><a>Good child</a></th:he></li>
+            <!-- Bad child-->
+            <li><th:he a-child><b>Bad child</b></th:he></li>
+            <!--This attribute shouldn't bind-->
+            <li><th:he not-an-attribute></th:he></li>
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <h2>P2P TagHelpers</h2>
+        <ul>            
+            <!--Multiple tag helpers-->
+            <li><th:he firstatt secondatt></th:he></li>
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <h2>Nuget TagHelpers</h2>
+        <ul>
+            <li><th:a href="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"></th:a></li>
+        </ul>
+    </div>
+    <script type="text/html" id="my-html">
+        <th:script-html></th:script-html>
+    </script>
+</div>
