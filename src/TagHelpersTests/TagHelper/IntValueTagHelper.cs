@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace TagHelpersTests
 {
-    [HtmlTargetElement("he")]
+    [HtmlTargetElement("he", Attributes = "[int-value]")]
     public class IntValueTagHelper : TagHelper
     {
         [HtmlAttributeName("int-value")]
@@ -18,7 +18,7 @@ namespace TagHelpersTests
         }
     }
     
-    [HtmlTargetElement("he")]
+    [HtmlTargetElement("he", Attributes = "[enum]")]
     public class EnumTagHelper : TagHelper
     {
         public CustomEnum Enum { get; set; }
@@ -32,6 +32,10 @@ namespace TagHelpersTests
     [HtmlTargetElement("he", Attributes = "[remove-tag-helper]")]
     public class RemovedTagHelper : TagHelper
     {
+        public override void Process(TagHelperContext context, TagHelperOutput output)
+        {
+            output.Content.Append(" SHOULD HAVE BEEN REMOVED! ");
+        }
     }
 
     [HtmlTargetElement("he", Attributes = "[required-attribute],[needed]")]
@@ -43,23 +47,25 @@ namespace TagHelpersTests
         }
     }
 
-    [HtmlTargetElement("he")]
+    [HtmlTargetElement("he", Attributes = "[content]")]
     public class ContentTagHelper : TagHelper
     {
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            output.Content.Append(" Boy that sure was content!");
+            var content = output.Attributes.First(s => s.Name == "content");
+            
+            output.Content.Append(content.Value + " Boy that sure was content!");
         }
     }
 
-    [HtmlTargetElement("he")]
+    [HtmlTargetElement("he", Attributes = "[bool-attribute]")]
     public class BoolTagHelper : TagHelper
     {
         public bool BoolAttribute { get; set; }
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            output.Content.Append(" good bool!");
+            output.Content.Append(" good bool!" + BoolAttribute.ToString());
         }
     }
 
@@ -82,7 +88,7 @@ namespace TagHelpersTests
         }
     }
 
-    [HtmlTargetElement("he")]
+    [HtmlTargetElement("he", Attributes = "[not-an-attribute]")]
     public class DontFindTagHelper : TagHelper
     {
         [HtmlAttributeNotBound]
@@ -90,7 +96,7 @@ namespace TagHelpersTests
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            output.Content.Append(" This should never show.");
+            output.Content.Append(" This should never show." + NotAnAttribute);
         }
     }
 

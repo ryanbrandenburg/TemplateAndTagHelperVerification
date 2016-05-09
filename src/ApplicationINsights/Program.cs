@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 
-namespace TagHelpersTests
+namespace ApplicationINsights
 {
     public class Program
     {
@@ -13,7 +13,7 @@ namespace TagHelpersTests
         {
             var host = new WebHostBuilder()
                 .UseKestrel()
-                .UseContentRoot(System.IO.Directory.GetCurrentDirectory())
+                .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseDefaultHostingConfiguration(args)
                 .UseIISIntegration()
                 .UseStartup<Startup>()

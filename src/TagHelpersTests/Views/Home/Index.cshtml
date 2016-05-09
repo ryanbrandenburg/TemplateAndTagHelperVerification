@@ -1,6 +1,10 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@addTagHelper *, TagHelperLibrary
+@tagHelperPrefix th:
 
 <div class="row">
     <div class="col-md-3">
@@ -20,10 +24,6 @@
             <li><th:he required-attribute></th:he></li>
             <!--required with attribute matches-->
             <li><th:he required-attribute needed></th:he></li>
-            <!--Incomplete Helper-->
-            <li><th:he not-a-helper ></th:he></li>
-            <!--Value required attribute-->
-            <li><th:he int-value></th:he></li>
             <li>Unquoted</li>
             <li><th:he int-value=123></th:he></li>
             <li>Double</li>
@@ -32,6 +32,7 @@
             <li><th:he int-value='123'></th:he></li>
             <!--Enum attribute-->
             <li><th:he enum="Charles"></th:he></li>
+
             <!--Dynamic Content-->
             <li><th:he content="prefix @DateTime.Now suffix"></th:he></li>
             <!--Optional at symbols-->
@@ -42,10 +43,8 @@
             <li><p><th:he li-parent></th:he></p></li>
             <!-- Good child-->
             <li><th:he a-child><a>Good child</a></th:he></li>
-            <!-- Bad child-->
-            <li><th:he a-child><b>Bad child</b></th:he></li>
             <!--This attribute shouldn't bind-->
-            <li><th:he not-an-attribute></th:he></li>
+            <li><th:he not-an-attribute="123"></th:he></li>
         </ul>
     </div>
     <div class="col-md-3">
@@ -62,6 +61,8 @@
         </ul>
     </div>
     <script type="text/html" id="my-html">
-        <th:script-html></th:script-html>
+        <th:environment names="Development">
+            Here's a thing!
+        </th:environment>
     </script>
 </div>

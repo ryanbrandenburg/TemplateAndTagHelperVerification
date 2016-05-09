@@ -44,7 +44,6 @@ namespace TagHelpersTests
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
             }
             else
             {

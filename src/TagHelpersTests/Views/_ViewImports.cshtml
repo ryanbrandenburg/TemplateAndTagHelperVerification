@@ -1,9 +1,5 @@
 ﻿@using TagHelpersTests
-@using Microsoft.Extensions.OptionsModel
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-<!-- @addTagHelper "*, TagHelpersTests" 
--->
-@addTagHelper *, TagHelperLibrary
-@removeTagHelper removetaghelper, TagHelperLibrary
-@inject Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration TelemetryConfiguration
-@tagHelperPrefix th:
+
+
+@addTagHelper*, TagHelpersTests
+@removeTagHelper "TagHelpersTests.RemovedTagHelper, TagHelpersTests"
